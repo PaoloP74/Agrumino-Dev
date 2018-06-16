@@ -8,9 +8,9 @@
 
 #include "Agrumino.h"
 #include <Wire.h>
-#include "libraries/MCP9800/MCP9800.cpp"
-#include "libraries/PCA9536_FIX/PCA9536_FIX.cpp" // PCA9536.h lib has been modified (REG_CONFIG renamed to REG_CONFIG_PCA) to avoid name clashing with mcp9800.h
-#include "libraries/MCP3221/MCP3221.cpp"
+#include "MCP9800.h"
+#include "PCA9536_FIX.h" // PCA9536.h lib has been modified (REG_CONFIG renamed to REG_CONFIG_PCA) to avoid name clashing with mcp9800.h
+#include "MCP3221.h"
 
 // PINOUT Agrumino        Implemented
 #define PIN_SDA          2 // [X] BOOT: Must be HIGH at boot
