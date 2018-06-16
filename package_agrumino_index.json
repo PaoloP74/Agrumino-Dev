@@ -12,8 +12,43 @@
         {
           "name": "Lifely Agrumino Boards",
           "architecture": "esp8266",
+          "version": "0.2",
+          "category": "contributed",
+          "url": "https://github.com/PaoloP74/Agrumino-Dev/archive/0.2.zip",
+          "checksum": "SHA-256:9884026fbbd430069d0bb8dfcff8aeb782c8fa0b0bff03a4f1afe9e3c16818d6",
+          "size": "20566941",
+          "archiveFileName": "0.2.zip", 
+          "boards": [
+            {
+              "name": "Agrumino Lemon (WT8266 Module)"
+            }
+          ],
+          "toolsDependencies": [
+            {
+              "packager": "agrumino", 
+              "version": "0.4.13", 
+              "name": "esptool"
+            }, 
+            {
+              "packager": "agrumino", 
+              "version": "1.20.0-26-gb404fb9-2", 
+              "name": "xtensa-lx106-elf-gcc"
+            }, 
+            {
+              "packager": "agrumino", 
+              "version": "0.2.0", 
+              "name": "mkspiffs"
+            }
+          ], 
+          "help": {
+            "online": "https://arduino-esp8266.readthedocs.io/en/2.4.1/"
+          }
+        },
+        {
+          "name": "Lifely Agrumino Boards",
+          "architecture": "esp8266",
           "version": "0.1",
-          "category": "Contributed",
+          "category": "contributed",
           "url": "https://github.com/PaoloP74/Agrumino-Dev/releases/download/0.1/Agrumino-0.1.0.zip",
           "checksum": "SHA-256:348b1f69940225ee20130806246cf069052f9af40071a2cdf85e1fc5ee2dc462",
           "size": "13195922",
