@@ -1,7 +1,9 @@
 {
   "packages": [
     {
-      "maintainer": "Lifely & AUGC", 
+      "name": "agrumino",
+      "maintainer": "Lifely & AUGC",
+      "email": "info@lifely.cc", 
       "help": {
         "online": "http://esp8266.com/arduino"
       }, 
@@ -10,7 +12,7 @@
         {
           "name": "Lifely Agrumino Boards",
           "architecture": "esp8266",
-          "version": "0.1.0",
+          "version": "0.1",
           "category": "Contributed",
           "url": "https://github.com/PaoloP74/Agrumino-Dev/releases/download/0.1/Agrumino-0.1.0.zip",
           "checksum": "SHA-256:348b1f69940225ee20130806246cf069052f9af40071a2cdf85e1fc5ee2dc462",
@@ -23,17 +25,17 @@
           ],
           "toolsDependencies": [
             {
-              "packager": "esp8266", 
+              "packager": "agrumino", 
               "version": "0.4.13", 
               "name": "esptool"
             }, 
             {
-              "packager": "esp8266", 
+              "packager": "agrumino", 
               "version": "1.20.0-26-gb404fb9-2", 
               "name": "xtensa-lx106-elf-gcc"
             }, 
             {
-              "packager": "esp8266", 
+              "packager": "agrumino", 
               "version": "0.2.0", 
               "name": "mkspiffs"
             }
@@ -503,9 +505,7 @@
             }
           ]
         }
-      ], 
-      "email": "ivan@esp8266.com", 
-      "name": "esp8266"
+      ]
     }
   ]
 }
