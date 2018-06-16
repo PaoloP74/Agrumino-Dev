@@ -21,7 +21,7 @@ class Agrumino {
     // Constructor
     Agrumino();
     void setup();
-    void deepSleepSec(int sec);
+    void deepSleepSec(unsigned int sec);
     
     // Public methods GPIO
     void turnWateringOn();
