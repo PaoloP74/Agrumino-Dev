@@ -79,7 +79,7 @@ void setup() {
 void loop() {
   currentMillis = millis();
   ArduinoOTA.handle();
-  
+
   if (currentMillis - previousMillis >= interval) {
     agrumino.turnBoardOn();
     checkStatus();
@@ -88,8 +88,8 @@ void loop() {
     previousMillis = currentMillis;
   }
 
-  //delaySec(SLEEP_TIME_SEC); // The ESP8266 stays powered, executes the loop repeatedly
-  //deepSleepSec(SLEEP_TIME_SEC); // ESP8266 enter in deepSleep and after the selected time starts back from setup() and then loop()
+  delaySec(SLEEP_TIME_SEC); // The ESP8266 stays powered, executes the loop repeatedly
+  agrumino.deepSleepSec(SLEEP_TIME_SEC); // ESP8266 enter in deepSleep and after the selected time starts back from setup() and then loop()
 }
 
 void checkStatus() {
@@ -133,9 +133,5 @@ void blinkLed() {
 
 void delaySec(int sec) {
   delay (sec * 1000);
-}
-
-void deepSleepSec(int sec) {
-  ESP.deepSleep(sec * 1000000); // microseconds
 }
 

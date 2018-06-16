@@ -15,13 +15,13 @@
 
 // ThingSpeak information.
 #define NUM_FIELDS 5                               // To update more fields, increase this number and add a field label below.
-#define TEMPERATURA 2
 #define UMIDITA 1
+#define TEMPERATURA 2
 #define LUMINOSITA 3
 #define TENSIONE 4
 #define LIVELLOBATT 5
 #define THING_SPEAK_ADDRESS "api.thingspeak.com"
-// String writeAPIKey="XXXXXXXXXXXXXXXX";             // Change this to your channel Write API key.
+String writeAPIKey = "XXXXXXXXXXXXXXXX";           // Change this to your channel Write API key.
 #define TIMEOUT  5000                              // Timeout for server response.
 
 // Our super cool lib
@@ -122,7 +122,7 @@ void loop() {
   agrumino.turnBoardOff();
 
   // delaySec(SLEEP_TIME_SEC); // The ESP8266 stays powered, executes the loop repeatedly
-  deepSleepSec(SLEEP_TIME_SEC); // ESP8266 enter in deepSleep and after the selected time starts back from setup() and then loop()
+  agrumino.deepSleepSec(SLEEP_TIME_SEC); // ESP8266 enter in deepSleep and after the selected time starts back from setup() and then loop()
 }
 
 //////////////////

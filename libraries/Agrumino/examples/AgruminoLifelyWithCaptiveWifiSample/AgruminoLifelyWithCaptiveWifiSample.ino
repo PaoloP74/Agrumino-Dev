@@ -110,7 +110,7 @@ void loop() {
   agrumino.turnBoardOff();
 
   // delaySec(SLEEP_TIME_SEC); // The ESP8266 stays powered, executes the loop repeatedly
-  deepSleepSec(SLEEP_TIME_SEC); // ESP8266 enter in deepSleep and after the selected time starts back from setup() and then loop()
+  agrumino.deepSleepSec(SLEEP_TIME_SEC); // ESP8266 enter in deepSleep and after the selected time starts back from setup() and then loop()
 }
 
 //////////////////
@@ -241,13 +241,6 @@ void blinkLed(int duration, int blinks) {
 
 void delaySec(int sec) {
   delay (sec * 1000);
-}
-
-void deepSleepSec(int sec) {
-  Serial.print("\nGoing to deepSleep for ");
-  Serial.print(sec);
-  Serial.println(" seconds... (ー。ー) zzz\n");
-  ESP.deepSleep(sec * 1000000); // microseconds
 }
 
 const String getChipId() {

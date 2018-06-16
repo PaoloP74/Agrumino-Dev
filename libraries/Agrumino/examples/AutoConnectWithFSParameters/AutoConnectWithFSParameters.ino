@@ -1,5 +1,4 @@
 #include <FS.h>                   //this needs to be first, or it all crashes and burns...
-
 #include <ESP8266WiFi.h>          //https://github.com/esp8266/Arduino
 
 //needed for library
@@ -155,12 +154,15 @@ void setup() {
     // NOTE: if updating SPIFFS this would be the place to unmount SPIFFS using SPIFFS.end()
     Serial.println("Start updating " + type);
   });
+
   ArduinoOTA.onEnd([]() {
     Serial.println("\nEnd");
   });
+
   ArduinoOTA.onProgress([](unsigned int progress, unsigned int total) {
     Serial.printf("Progress: %u%%\r", (progress / (total / 100)));
   });
+
   ArduinoOTA.onError([](ota_error_t error) {
     Serial.printf("Error[%u]: ", error);
     if (error == OTA_AUTH_ERROR) {
@@ -175,6 +177,7 @@ void setup() {
       Serial.println("End Failed");
     }
   });
+
   ArduinoOTA.begin();
   Serial.println("Ready");
   Serial.print("IP address: ");
@@ -183,6 +186,5 @@ void setup() {
 
 void loop() {
   ArduinoOTA.handle();
-  
 }
 
