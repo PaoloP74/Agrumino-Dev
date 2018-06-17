@@ -43,7 +43,7 @@
 #define BATTERY_MILLIVOLT_LEVEL_0    3500 // Voltage of a fully discharged battery (Safe value, cut-off of a LIR2450 is 2.75 V)
 #define BATTERY_MILLIVOLT_LEVEL_100  4200 // Voltage of a fully charged battery
 #define BATTERY_VOLT_DIVIDER_Z1      1800 // Value of the Z1(R25) resistor in the Voltage divider used for read the batt voltage.
-#define BATTERY_VOLT_DIVIDER_Z2       424 // 470 (Original) // Value of the Z2(R26) resistor. Adjusted considering the ADC internal resistance.
+#define BATTERY_VOLT_DIVIDER_Z2       470 // 470 (Original) // Value of the Z2(R26) resistor. Adjusted considering the ADC internal resistance.
 #define BATTERY_VOLT_SAMPLES           20 // Number of reading needed to calculate the battery voltage
 
 ///////////////
