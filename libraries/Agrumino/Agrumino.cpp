@@ -217,8 +217,8 @@ unsigned int Agrumino::readBatteryLevel() {
 
 void Agrumino::initGpioExpander() {
   Serial.print("initGpioExpander → ");
-  boolean success = pcaGpioExpander.ping();;
-  if (success) {
+  boolean error = pcaGpioExpander.ping();
+  if (!error) {
     pcaGpioExpander.reset();
     pcaGpioExpander.setMode(IO_PCA9536_LED, IO_OUTPUT); // Back green LED
     pcaGpioExpander.setState(IO_PCA9536_LED, IO_LOW);
@@ -230,8 +230,10 @@ void Agrumino::initGpioExpander() {
 
 void Agrumino::initTempSensor() {
   Serial.print("initTempSensor   → ");
-  boolean success = mcpTempSensor.init(true);
-  if (success) {
+  Wire.beginTransmission(I2C_ADDR_TEMP);
+  boolean error = Wire.endTransmission();
+  if (!error) {
+    mcpTempSensor.init(false);
     mcpTempSensor.setResolution(MCP_ADC_RES_11); // 11bit (0.125c)
     mcpTempSensor.setOneShot(true);
     Serial.println("OK");
@@ -242,8 +244,8 @@ void Agrumino::initTempSensor() {
 
 void Agrumino::initSoilSensor() {
   Serial.print("initSoilSensor   → ");
-  boolean success = mcpSoilSensor.ping();;
-  if (success) {
+  boolean error = mcpSoilSensor.ping();
+  if (!error) {
     mcpSoilSensor.reset();
     mcpSoilSensor.setSmoothing(EMAVG);
     // mcpSoilSensor.setVref(3300); This will make the reading of the MCP3221 voltage accurate. Currently is not needed because we need just a range
@@ -259,8 +261,8 @@ void Agrumino::initLuxSensor() {
   // Logic for Light-to-Digital Output Sensor ISL29003
   Serial.print("initLuxSensor    → ");
   Wire.beginTransmission(I2C_ADDR_LUX);
-  boolean success = Wire.endTransmission();
-  if (success) {
+  boolean error = Wire.endTransmission();
+  if (!error) {
     Wire.beginTransmission(I2C_ADDR_LUX);
     Wire.write(0x00); // Select "Command-I" register
     Wire.write(0xA0); // Select "ALS continuously" mode
