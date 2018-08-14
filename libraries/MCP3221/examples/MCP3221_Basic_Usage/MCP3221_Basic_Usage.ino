@@ -1,17 +1,11 @@
 /* 
-  MCP3221 LIBRARY - I2C COMMUNICATION STATUS STRING EXAMPLE
-  ---------------------------------------------------------
+  MCP3221 LIBRARY - BASIC USAGE EXAMPLE
+  -------------------------------------
 
   INTRODUCTION
   ------------
-  This sketch presents a minimal example of extending the MCP3221 Library to include an additional function for generating a printable
-  I2C Communications Status string which may be useful, for example, during debugging sessions.
-
-  As can be seen in the sketch below, implementation of this extended functionality only requires adding a single 'include' to the code, namely: 
-  to that of the relevant *.h file (/utilty/MCP3221ComStr.h).
-  
-  Note that this functional extension does come at the cost of an increased memory usage, and therefore it seemed preferable to maintain it 
-  as an optional add-on rather than include it in the core MCP3221 Library itself.
+  This sketch presents a minimal usage example with the MCP3221 Library in which a voltage reading is performed evey 600mS 
+  from a 5V input.  
 
   WIRING DIAGRAM
   --------------
@@ -27,7 +21,7 @@
   PIN 1 (VCC/VREF) - Serves as both Power Supply input and Voltage Reference for the ADC. Connect to Arduino 5V output or any other
                 equivalent power source (5.5V max). If using an external power source, remember to connect all GND's together
   PIN 2 (GND) - connect to Arduino GND
-  PIN 3 (AIN) - Connect to Arduino's 3.3V Output
+  PIN 3 (AIN) - Connect to Arduino's 3.3V Output or to the middle pin of a 10K potentiometer (the pot's first pin goes to GND and the third to 5V)
   PIN 4 (SDA) - Connect to Arduino's PIN A4 with a 2K2 (400MHz I2C Bus speed) or 10K (100MHz I2C Bus speed) pull-up resistor
   PIN 5 (SCL) - Connect to Arduino's PIN A5 with a 2K2 (400MHz I2C Bus speed) or 10K (100MHz I2C Bus speed) pull-up resistor
   DECOUPING:    Minimal decoupling consists of a 0.1uF Ceramic Capacitor between the VCC & GND PINS. For improved performance,
@@ -75,24 +69,30 @@
 */
 
 #include "MCP3221.h"
-#include "utility/MCP3221ComStr.h"
 
 const byte DEV_ADDR = 0x4D;                            // I2C address of the MCP3221 (Change as needed)
+
+unsigned long timeNow;
 
 MCP3221 mcp3221(DEV_ADDR);
 
 void setup() {
     Serial.begin(9600);
     Wire.begin();
-    while(!Serial);
-    Serial.print(F("\nMCP3221 I2C 12-BIT ADC"));
-    Serial.print(F("\n----------------------"));
-    Serial.print(F("\n\nVOLTAGE READING:\t"));
-    Serial.print(mcp3221.getVoltage());
-    Serial.print(F("\n\nI2C STATUS:\t"));
-    Serial.print(MCP3221ComStr(mcp3221));
-    Serial.print(F("\n\n"));
+    Serial.print(F("\n\nserial is open\n\n"));
+    mcp3221.setVref(4096);                            // sets voltage reference for the ADC in mV (change as needed)
+    mcp3221.setVinput(VOLTAGE_INPUT_5V);              // sets voltage input type to be measured (change as needed)
+    mcp3221.setRes1(10000);                           // sets exact value of the voltage divider's Resistor 1 for 12V readings (change as needed)
+    mcp3221.setRes2(4700);                            // sets exact value of the voltage divider's Resistor 2 for 12V readings (change as needed)
+    mcp3221.setAlpha(178);                            // sets the Alpha value used by the EMAVG smoothing method (change as needed)
+    timeNow = millis();
 }
 
-void loop() {}
-
+void loop() {
+    if (millis() - timeNow >= 600) {
+        Serial.print(F("reading:\t"));
+        Serial.print(mcp3221.getVoltage());
+        Serial.print(F("mV\n\n"));  
+        timeNow = millis();
+    }
+}
