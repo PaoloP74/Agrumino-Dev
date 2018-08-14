@@ -138,9 +138,15 @@ wl_status_t ESP8266WiFiSTAClass::begin(const char* ssid, const char *passphrase,
         conf.bssid_set = 0;
     }
 
-    struct station_config current_conf;
-    wifi_station_get_config(&current_conf);
-    if(sta_config_equal(current_conf, conf)) {
+    struct station_config conf_compare;
+    if(WiFi._persistent){
+        wifi_station_get_config_default(&conf_compare);
+    }
+    else {
+        wifi_station_get_config(&conf_compare);
+    }
+
+    if(sta_config_equal(conf_compare, conf)) {
         DEBUGV("sta config unchanged");
     }
     else {
@@ -351,6 +357,14 @@ bool ESP8266WiFiSTAClass::setAutoReconnect(bool autoReconnect) {
 }
 
 /**
+ * get whether reconnect or not when the ESP8266 station is disconnected from AP.
+ * @return autoreconnect
+ */
+bool ESP8266WiFiSTAClass::getAutoReconnect() {
+    return wifi_station_get_reconnect_policy();
+}
+
+/**
  * Wait for WiFi connection to reach a result
  * returns the status reached or disconnect if STA is off
  * @return wl_status_t
@@ -557,6 +571,9 @@ int32_t ESP8266WiFiSTAClass::RSSI(void) {
 // -------------------------------------------------- STA remote configure -----------------------------------------------
 // -----------------------------------------------------------------------------------------------------------------------
 
+#ifdef NO_EXTRA_4K_HEAP
+/* NO_EXTRA_4K_HEAP's description in cores/esp8266/core_esp8266_main.cpp */
+
 void wifi_wps_status_cb(wps_cb_status status);
 
 /**
@@ -636,7 +653,7 @@ void wifi_wps_status_cb(wps_cb_status status) {
     esp_schedule(); // resume the beginWPSConfig function
 }
 
-
+#endif // NO_EXTRA_4K_HEAP
 
 bool ESP8266WiFiSTAClass::_smartConfigStarted = false;
 bool ESP8266WiFiSTAClass::_smartConfigDone = false;

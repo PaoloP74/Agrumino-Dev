@@ -1,5 +1,7 @@
 #
-# this file is script-generated and is likely to be overwritten by boards.txt.py
+# Do not create pull-requests for this file only, CI will not accept them.
+# You *must* edit/modify/run boards.txt.py to regenerate boards.txt.
+# All modified files after running with option "--allgen" must be included in the pull-request.
 #
 
 menu.BoardModel=Model
@@ -14,12 +16,13 @@ menu.ESPModule=Module
 menu.Debug=Debug port
 menu.DebugLevel=Debug Level
 menu.LwIPVariant=lwIP Variant
+menu.VTable=VTables
 menu.led=Builtin Led
 menu.FlashErase=Erase Flash
 
 ##############################################################
 agrumino.name=Agrumino Lemon (WT8266 Module)
-agrumino.build.board=ESP8266_GENERIC
+agrumino.build.board=ESP8266_agrumino
 agrumino.build.variant=agrumino
 agrumino.upload.tool=esptool
 agrumino.upload.maximum_data_size=81920
@@ -34,6 +37,12 @@ agrumino.build.debug_port=
 agrumino.build.debug_level=
 agrumino.build.f_cpu=80000000L
 agrumino.upload.resetmethod=nodemcu
+agrumino.menu.VTable.flash=Flash
+agrumino.menu.VTable.flash.build.vtable_flags=-DVTABLES_IN_FLASH
+agrumino.menu.VTable.heap=Heap
+agrumino.menu.VTable.heap.build.vtable_flags=-DVTABLES_IN_DRAM
+agrumino.menu.VTable.iram=IRAM
+agrumino.menu.VTable.iram.build.vtable_flags=-DVTABLES_IN_IRAM
 agrumino.build.flash_mode=qio
 agrumino.build.flash_freq=40
 agrumino.build.flash_size=2M
@@ -109,11 +118,11 @@ agrumino.menu.DebugLevel.UPDATER.build.debug_level= -DDEBUG_ESP_UPDATER
 agrumino.menu.DebugLevel.OTA=OTA
 agrumino.menu.DebugLevel.OTA.build.debug_level= -DDEBUG_ESP_OTA
 agrumino.menu.DebugLevel.OOM=OOM
-agrumino.menu.DebugLevel.OOM.build.debug_level= -DDEBUG_ESP_OOM -include "umm_malloc/umm_malloc_cfg.h"
+agrumino.menu.DebugLevel.OOM.build.debug_level= -DDEBUG_ESP_OOM
 agrumino.menu.DebugLevel.COREWIFIHTTP_UPDATEUPDATEROTAOOM=CORE+WIFI+HTTP_UPDATE+UPDATER+OTA+OOM
-agrumino.menu.DebugLevel.COREWIFIHTTP_UPDATEUPDATEROTAOOM.build.debug_level= -DDEBUG_ESP_CORE -DDEBUG_ESP_WIFI -DDEBUG_ESP_HTTP_UPDATE -DDEBUG_ESP_UPDATER -DDEBUG_ESP_OTA -DDEBUG_ESP_OOM -include "umm_malloc/umm_malloc_cfg.h"
+agrumino.menu.DebugLevel.COREWIFIHTTP_UPDATEUPDATEROTAOOM.build.debug_level= -DDEBUG_ESP_CORE -DDEBUG_ESP_WIFI -DDEBUG_ESP_HTTP_UPDATE -DDEBUG_ESP_UPDATER -DDEBUG_ESP_OTA -DDEBUG_ESP_OOM
 agrumino.menu.DebugLevel.SSLTLS_MEMHTTP_CLIENTHTTP_SERVERCOREWIFIHTTP_UPDATEUPDATEROTAOOM=SSL+TLS_MEM+HTTP_CLIENT+HTTP_SERVER+CORE+WIFI+HTTP_UPDATE+UPDATER+OTA+OOM
-agrumino.menu.DebugLevel.SSLTLS_MEMHTTP_CLIENTHTTP_SERVERCOREWIFIHTTP_UPDATEUPDATEROTAOOM.build.debug_level= -DDEBUG_ESP_SSL -DDEBUG_ESP_TLS_MEM -DDEBUG_ESP_HTTP_CLIENT -DDEBUG_ESP_HTTP_SERVER -DDEBUG_ESP_CORE -DDEBUG_ESP_WIFI -DDEBUG_ESP_HTTP_UPDATE -DDEBUG_ESP_UPDATER -DDEBUG_ESP_OTA -DDEBUG_ESP_OOM -include "umm_malloc/umm_malloc_cfg.h"
+agrumino.menu.DebugLevel.SSLTLS_MEMHTTP_CLIENTHTTP_SERVERCOREWIFIHTTP_UPDATEUPDATEROTAOOM.build.debug_level= -DDEBUG_ESP_SSL -DDEBUG_ESP_TLS_MEM -DDEBUG_ESP_HTTP_CLIENT -DDEBUG_ESP_HTTP_SERVER -DDEBUG_ESP_CORE -DDEBUG_ESP_WIFI -DDEBUG_ESP_HTTP_UPDATE -DDEBUG_ESP_UPDATER -DDEBUG_ESP_OTA -DDEBUG_ESP_OOM
 agrumino.menu.DebugLevel.NoAssert-NDEBUG=NoAssert-NDEBUG
 agrumino.menu.DebugLevel.NoAssert-NDEBUG.build.debug_level= -DNDEBUG
 agrumino.menu.FlashErase.none=Only Sketch
